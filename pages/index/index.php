@@ -65,18 +65,26 @@ header {
             font-weight: thin;
             line-height: 1.2em;
             letter-spacing: 5px;
+            margin-top: 100px;
         }
 
         .subtitulo {
             font-size: 1.5em;
             margin-top: 20px;
-            margin-bottom: 100px;
+            margin-bottom: 350px;
+        }
+        .bottom {
+            position: absolute;
+            bottom: 50px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 1350px;
         }
 
         .btn-entrar {
-            margin-top: 70px;
-            background-color:#fff;
-            color: #090909;
+            background-color:transparent;
+            color: #fff;
             padding: 12px 25px;
             border-radius: 20px;
             font-weight: bold;
@@ -85,19 +93,35 @@ header {
             font-size: 20px;
         }
         .btn-entrar:hover {
-            background-color: transparent;
-            color: #fff;
+            background-color:#fff;
+            color: #090909;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            transition: 1s;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .info-direita {
-            position: absolute;
-            bottom: 90px;
-            right: 40px;
-            text-align: right;
+        .info-direita .linha {
             font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            
         }
+        .info-direita .linha::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0; /* ou ajuste conforme necessário */
+          height: 2px;
+          background: white;
+          width: 100%;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.4s ease;
+        }
+        .info-direita:hover .linha::after {
+          transform: scaleX(1);
+        }
+        
         .pontos {
     position: relative;
     width: 100%;
@@ -155,86 +179,252 @@ header {
     opacity: 1;
   }
 }
-.galeria {
-    background-color: black;
-    height: 700px;
-}
-.meu-container {
-  font-family: Arial, sans-serif;
-  background: #fff;
-  padding: 30px;
-  text-align: center;
+
+
+   .carrossel-container {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #ccc;
+    text-align: center;
+    padding: 90px;
 }
 
-.meu-container .text-container {
-  margin-bottom: 30px;
-  font-size: 1.4rem;
+.carrossel-texto {
+    letter-spacing: 5px;
+    font-size: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 500;
+    text-align: left;
 }
 
-/* Frases dentro do container */
-.meu-container .frase1,
-.meu-container .frase2,
-.meu-container .frase3,
-.meu-container .frase4 {
-  display: inline-block;
-  margin: 0 10px;
-  padding: 5px 15px;
-  cursor: pointer;
-  position: relative;
-  color: #333;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: color 0.3s ease;
+.carrossel-frase {
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+    position: relative;
 }
 
-.meu-container .frase1:hover,
-.meu-container .frase2:hover,
-.meu-container .frase3:hover,
-.meu-container .frase4:hover {
-  color: white;
+.carrossel-frase:hover {
+    background: linear-gradient(90deg, #B987FF, #0078F2, #9EFEF9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
-.meu-container .frase1:hover::before,
-.meu-container .frase2:hover::before,
-.meu-container .frase3:hover::before,
-.meu-container .frase4:hover::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  border-radius: 6px;
-  background: linear-gradient(270deg, #B987FF, #0078F2, #9EFEF9);
-  background-size: 600% 600%;
-  animation: gradientMove 5s ease infinite;
-  z-index: -1;
-}
-
 @keyframes gradientMove {
   0% {background-position: 0% 50%;}
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
 }
 
-.meu-container .images-container {
+.carrossel-frase.ativa {
+    color: white;
+}
+
+.carrossel-imagens {
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: nowrap;
+  margin-top: 50px;
+  overflow: hidden;
+  width: 100%;
 }
 
-.meu-container .img-small {
-  width: 150px;
-  height: 192px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+.carrossel-grupo {
+  display: none;
+  opacity: 0;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  transition: opacity 0.8s ease;
 }
 
-.meu-container .img-large {
-  width: 327px;
-  height: 192px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+.carrossel-grupo.ativo {
+  display: flex;
 }
+
+.carrossel-img {
+  height: 384px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.carrossel-img-container {
+  position: relative;
+  display: inline-block; /* mantém as imagens lado a lado dentro do grupo */
+  cursor: pointer;
+  border-radius: 10px; /* mesma borda arredondada da imagem */
+  overflow: hidden; /* para o filtro não "vazar" */
+  height: 384px; /* igual altura da imagem */
+  width: auto; /* largura será controlada pela imagem */
+}
+
+.carrossel-img-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Texto do fornecedor - inicialmente invisível */
+.fornecedor-texto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Hover no container da imagem */
+.carrossel-img-container:hover img {
+  filter: brightness(40%);
+  transform: scale(1.05);
+}
+
+.carrossel-img-container:hover .fornecedor-texto {
+  opacity: 1;
+}
+
+/* Tamanhos */
+.smallUm {
+  width: 300px;
+}
+.largeUm {
+  width: 654px;
+}
+.smallDois {
+  width: 282px;
+}
+.largeDois {
+  width: 500px;
+}
+
+
+
+
+.categorias {
+  display: flex;
+  flex-direction: row;
+  height: 650px;
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #0D0D0F;
+  margin-left: 25px;
+  
+}
+
+.categorias img {
+  height: 650px;
+  width: 543px;
+  object-fit: cover;
+  margin-left: auto;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.titulo {
+  font-size: 45px;
+  margin: 0;
+  color: #0D0D0F;
+  height: 150px;
+  font-weight: 100;
+}
+
+.linha-categoria {
+  width: 700px;
+  border: 1px solid #0D0D0F;
+  margin: 10px 0;
+}
+
+.descricao {
+  font-size: 30px;
+  max-width: 800px;
+  margin-bottom: auto;
+  color: #0D0D0F;
+  margin-top: 25px;
+}
+
+.botoes-row {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.botao-link {
+  background-color: transparent;
+  color: #0D0D0F;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: 2px solid #0D0D0F;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.botao-link:hover {
+  background-color: #0D0D0F;
+  color: white;
+}
+
+.posicao {
+  margin-left: 200px;
+  color: #0D0D0F;
+}
+
+.controles {
+  display: flex;
+  gap: 10px;
+}
+
+.circulo {
+  background-color: transparent;
+  border: 2px solid #0D0D0F;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  padding: 30%;
+}
+.circulo:hover {
+  background-color: #0D0D0F;
+}
+.circulo:hover img {
+  filter: brightness(0) invert(1); /* inverter cor da seta no hover */
+}
+
+.circulo img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.seta-direita {
+  transform: rotate(180deg);
+}
+
+
 
 
 
@@ -251,10 +441,13 @@ echo $html;
                 DEPARTAMENTO DE <br> SUPRIMENTOS
             </div>
             <div class="subtitulo">Reposição de material de informática</div>
+            <div class="bottom">
             <button class="btn-entrar">Entre agora</button>
             <div class="info-direita">
-                Reposições, novidades e<br> sugestões
+              <span class="linha">Reposições, novidades e</span><br>
+              <span class="linha">sugestões</span>
             </div>
+          </div>
         </div>
     </div>
     <div class="pontos">
@@ -262,39 +455,116 @@ echo $html;
         Garantimos que cada equipe tenha os recursos certos no momento certo, com eficiência, suporte técnico confiável e foco em alta performance operacional.
     </div>
 </div>
-<div class="galeria"></div>
-<div class="meu-container">
-  <div class="text-container" style="font-size:1.4rem; text-align:center;">
-    <span class="frase1">Esta é a primeira frase</span>.
-    <span class="frase2"> Aqui vai a segunda frase</span>.
-    <span class="frase3"> Mais uma terceira frase</span>.
-    <span class="frase4"> Finalmente a quarta frase</span>.
-  </div>
 
-  <div class="images-container">
-    <img src="https://via.placeholder.com/150x192.png?text=Imagem+1" alt="Imagem 1" class="img-small" />
-    <img src="https://via.placeholder.com/327x192.png?text=Imagem+Grande" alt="Imagem Grande" class="img-large" />
-    <img src="https://via.placeholder.com/150x192.png?text=Imagem+2" alt="Imagem 2" class="img-small" />
+
+<div class="carrossel-container">
+  <p class="carrossel-texto">
+    <span class="carrossel-frase" data-index="0">Conheça os novos periféricos.</span>
+    <span class="carrossel-frase" data-index="1"> Itens essenciais para o dia a dia.</span>
+    <span class="carrossel-frase" data-index="2"> Equipamentos de alto desempenho.</span>
+    <span class="carrossel-frase" data-index="3"> Organização para Setups eficientes.</span>
+  </p>
+
+  <div class="carrossel-imagens">
+    <!-- Grupo 0 -->
+    <div class="carrossel-grupo ativo" data-group="0">
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselUmUm.png" class="carrossel-img smallUm" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselUmDois.png" class="carrossel-img largeUm" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselUmTres.png" class="carrossel-img smallUm" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+    </div>
+
+    <!-- Grupo 1 -->
+    <div class="carrossel-grupo" data-group="1">
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselDoisUm.png" class="carrossel-img largeDois" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselDoisDois.png" class="carrossel-img smallDois" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselDoisTres.png" class="carrossel-img largeDois" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+    </div>
+
+    <!-- Grupo 2 -->
+    <div class="carrossel-grupo" data-group="2">
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselTresUm.png" class="carrossel-img largeDois" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselTresDois.png" class="carrossel-img smallDois" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselTresTres.png" class="carrossel-img largeDois" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+    </div>
+
+    <!-- Grupo 3 -->
+    <div class="carrossel-grupo" data-group="3">
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselQuatroUm.png" class="carrossel-img largeDois" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselQuatroDois.png" class="carrossel-img smallDois" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+      <div class="carrossel-img-container">
+        <img src="./imgs/imgCarrosselQuatroTres.png" class="carrossel-img largeDois" />
+        <span class="fornecedor-texto">Voxen</span>
+      </div>
+    </div>
   </div>
 </div>
 
 
-<script>
-  const textoBox = document.querySelector('.texto-box');
+<div class="categorias">
+  <div class="information">
+    <h2 class="titulo">Título da Categoria</h2>
+    <hr class="linha-categoria" />
+    <p class="descricao">Essa é uma descrição da categoria, com informações interessantes e relevantes.</p>
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        textoBox.classList.add('tilt-in-left-1');
-        observer.unobserve(entry.target); // só anima uma vez
-      }
-    });
-  }, {
-    threshold: 0.3 // ativa quando 30% do elemento estiver visível
-  });
+    <div class="botoes-row">
+      <a href="#" class="botao-link">Dê uma olhada</a>
+      <span class="posicao">1/5</span>
+      <div class="controles">
+        <button class="circulo">
+          <img src="./imgs/setaEsquerda.png" alt="Seta para esquerda">
+        </button>
+        <button class="circulo">
+          <img src="./imgs/setaEsquerda.png" alt="Seta para direita" class="seta-direita">
+        </button>
+      </div>
+    </div>
+  </div>
 
-  observer.observe(textoBox);
-</script>
+  <img src="./imgs/logoBranca.png" alt="Imagem da categoria">
+</div>
+
+
+
+
+
+
+
+
+<script src="index.js"></script>
+
 
 
 </body>
