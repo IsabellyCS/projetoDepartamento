@@ -85,8 +85,8 @@ header {
         .btn-entrar {
             background-color:transparent;
             color: #fff;
-            padding: 12px 25px;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 30px;
             font-weight: bold;
             border: 2px solid #fff;
             cursor: pointer;
@@ -179,7 +179,6 @@ header {
     opacity: 1;
   }
 }
-
 
    .carrossel-container {
     font-family: Arial, sans-serif;
@@ -315,18 +314,17 @@ header {
 .categorias {
   display: flex;
   flex-direction: row;
-  height: 650px;
+  height: 600px;
   width: 100%;
   background-color: white;
   padding: 20px;
   box-sizing: border-box;
   color: #0D0D0F;
   margin-left: 25px;
-  
 }
 
 .categorias img {
-  height: 650px;
+  height: 600px;
   width: 543px;
   object-fit: cover;
   margin-left: auto;
@@ -337,13 +335,13 @@ header {
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
+
 }
 
 .titulo {
   font-size: 45px;
-  margin: 0;
+  margin-top: 10px;
   color: #0D0D0F;
-  height: 150px;
   font-weight: 100;
 }
 
@@ -365,19 +363,20 @@ header {
   display: flex;
   align-items: center;
   gap: 30px;
-  font-size: 18px;
-  margin-bottom: 30px;
+  font-size: 22px;
+  margin-bottom: 20px;
 }
 
 .botao-link {
   background-color: transparent;
   color: #0D0D0F;
-  padding: 10px 20px;
+  padding: 15px 20px;
   text-decoration: none;
   border: 2px solid #0D0D0F;
-  border-radius: 20px;
-  font-weight: bold;
+  border-radius: 30px;
+  font-weight: 500;
   transition: 0.3s;
+  
 }
 .botao-link:hover {
   background-color: #0D0D0F;
@@ -385,13 +384,14 @@ header {
 }
 
 .posicao {
-  margin-left: 200px;
+  margin-left: 450px;
   color: #0D0D0F;
+  width: 50px;
 }
 
 .controles {
   display: flex;
-  gap: 10px;
+  gap: 20px;
 }
 
 .circulo {
@@ -423,6 +423,96 @@ header {
 .seta-direita {
   transform: rotate(180deg);
 }
+
+
+.newsletter {
+  display: flex;
+  flex-direction: row;
+  margin-left: 75px;
+  margin-top: 100px;
+  height: 350px;
+}
+.inscrito {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 80px;
+  align-items: center;
+}
+.tituloNewsletter {
+  font-weight: 100;
+  font-size: 60px;
+}
+h6 {
+  font-size: 30px;
+  text-align: center;
+  font-weight: 100;
+  margin-bottom: 40px;
+
+}
+.inscrito input {
+  width: 100%;
+  height: 35px;
+  margin: 25px 0;
+  border: none;
+  border-bottom: 0.5px solid #0D0D0F; /* cor da sua identidade visual */
+  outline: none; /* remove borda azul ao focar */
+}
+.inscrito input:hover {
+  border-bottom: 1px solid #0D0D0F; /* um pouquinho mais forte */
+}
+.inscreva-se {
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-size: 22px;
+  cursor: pointer;
+  background-color: transparent;
+  margin-top: 50px;
+}
+.inscreva-se:hover {
+  color: #fff;
+  background-color: #000;
+  transition: 0.3s ease;
+}
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-wrapper input {
+  width: 100%;
+  height: 35px;
+  padding-bottom: 10px;
+  padding-left: 50px; /* espaço para o ícone + margem */
+  border: none;
+  border-bottom: 0.5px solid #0D0D0F;
+  outline: none;
+  font-size: 22px;
+  background-color: transparent;
+  color: #0D0D0F;
+}
+
+/* Ícone de e-mail à esquerda */
+.input-wrapper .input-icon {
+  position: absolute;
+  left: 10px;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+}
+
+
+/* Correção para autofill do navegador */
+.input-wrapper input:-webkit-autofill {
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 30px white inset !important; /* força fundo branco */
+  -webkit-text-fill-color: #0D0D0F !important; /* força cor do texto */
+}
+
+
+
 
 
 
@@ -474,11 +564,11 @@ echo $html;
       </div>
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselUmDois.png" class="carrossel-img largeUm" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">EletroniMax</span>
       </div>
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselUmTres.png" class="carrossel-img smallUm" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">TechSupply</span>
       </div>
     </div>
 
@@ -486,15 +576,15 @@ echo $html;
     <div class="carrossel-grupo" data-group="1">
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselDoisUm.png" class="carrossel-img largeDois" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">VoltBrasil</span>
       </div>
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselDoisDois.png" class="carrossel-img smallDois" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">MegaChip</span>
       </div>
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselDoisTres.png" class="carrossel-img largeDois" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">EletroFácil</span>
       </div>
     </div>
 
@@ -502,15 +592,15 @@ echo $html;
     <div class="carrossel-grupo" data-group="2">
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselTresUm.png" class="carrossel-img largeDois" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">NovaPlaca</span>
       </div>
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselTresDois.png" class="carrossel-img smallDois" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">CircuitoDireto</span>
       </div>
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselTresTres.png" class="carrossel-img largeDois" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">Fio&Carga</span>
       </div>
     </div>
 
@@ -518,15 +608,15 @@ echo $html;
     <div class="carrossel-grupo" data-group="3">
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselQuatroUm.png" class="carrossel-img largeDois" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">BitParts</span>
       </div>
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselQuatroDois.png" class="carrossel-img smallDois" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">ConectaTech</span>
       </div>
       <div class="carrossel-img-container">
         <img src="./imgs/imgCarrosselQuatroTres.png" class="carrossel-img largeDois" />
-        <span class="fornecedor-texto">Voxen</span>
+        <span class="fornecedor-texto">Modulink</span>
       </div>
     </div>
   </div>
@@ -535,26 +625,40 @@ echo $html;
 
 <div class="categorias">
   <div class="information">
-    <h2 class="titulo">Título da Categoria</h2>
+    <h2 class="titulo" id="titulo">Equipamentos</h2>
     <hr class="linha-categoria" />
-    <p class="descricao">Essa é uma descrição da categoria, com informações interessantes e relevantes.</p>
+    <p class="descricao" id="descricao">Dispositivos essenciais usados pelas equipes no dia a dia e na operação dos sistemas da empresa.</p>
 
     <div class="botoes-row">
-      <a href="#" class="botao-link">Dê uma olhada</a>
-      <span class="posicao">1/5</span>
+      <a href="#" class="botao-link" id="link">Dê uma olhada</a>
+      <span class="posicao" id="posicao">1/5</span>
       <div class="controles">
-        <button class="circulo">
+        <button class="circulo" id="anterior">
           <img src="./imgs/setaEsquerda.png" alt="Seta para esquerda">
         </button>
-        <button class="circulo">
+        <button class="circulo" id="proximo">
           <img src="./imgs/setaEsquerda.png" alt="Seta para direita" class="seta-direita">
         </button>
       </div>
     </div>
   </div>
 
-  <img src="./imgs/logoBranca.png" alt="Imagem da categoria">
+  <img id="imagem" src="./imgs/categoriaDois.png" style="margin-top: -20px;" alt="Imagem da categoria">
 </div>
+
+<div class="newsletter">
+  <h1 class="tituloNewsletter">Fique de olho nas novidades</h1>
+  <div class="inscrito">
+    <h6>Se inscreva no nosso newsletter</h6>
+    <div class="input-wrapper">
+      <img src="./imgs/email-icon.png" alt="Ícone de e-mail" class="input-icon" />
+      <input type="email" placeholder="Seu e-mail" name="email" autocomplete="email" />
+    </div>
+    <button class="inscreva-se">Inscreva-se</button>
+  </div>
+</div>
+
+
 
 
 

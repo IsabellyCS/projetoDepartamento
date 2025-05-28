@@ -65,3 +65,93 @@ frases.forEach(frase => {
 // Inicializa
 mostrarGrupo(grupoAtual);
 iniciarAutoplay();
+
+
+
+
+
+
+
+const dados = [
+  {
+    titulo: "Periféricos",
+    descricao: "Dispositivos que complementam o uso dos computadores e tornam o trabalho mais eficiente, como mouses, teclados e webcams.",
+    imagem: "./imgs/categoriaUm.png",
+    link: "#"
+  },
+  {
+    titulo: "Equipamentos",
+    descricao: "Dispositivos essenciais usados pelas equipes no dia a dia e na operação dos sistemas da empresa.",
+    imagem: "./imgs/categoriaDois.png",
+    link: "#"
+  },
+  {
+    titulo: "Cabos e conectividade",
+    descricao: "Tudo o que você precisa para alimentar, conectar e expandir seu ambiente digital.",
+    imagem: "./imgs/categoriaTres.png",
+    link: "#"
+  },
+  {
+    titulo: "Impressão e digitalização",
+    descricao: "Equipamentos e suprimentos para impressão, cópia e digitalização de documentos.",
+    imagem: "./imgs/categoriaQuatro.png",
+    link: "#"
+  },
+  {
+    titulo: "Cabos e conectividade",
+    descricao: "Peças e itens técnicos para consertos, atualizações e suporte a equipamentos.",
+    imagem: "./imgs/categoriaCinco.jpg",
+    link: "#"
+  }
+];
+
+let indiceAtual = 0;
+
+const titulo = document.getElementById("titulo");
+const descricao = document.getElementById("descricao");
+const imagem = document.getElementById("imagem");
+const link = document.getElementById("link");
+const posicao = document.getElementById("posicao");
+
+const btnAnterior = document.getElementById("anterior");
+const btnProximo = document.getElementById("proximo");
+
+function atualizarCarrossel() {
+  const item = dados[indiceAtual];
+  titulo.textContent = item.titulo;
+  descricao.textContent = item.descricao;
+  imagem.src = item.imagem;
+  link.href = item.link;
+  posicao.textContent = `${indiceAtual + 1}/5`;
+
+  // Controle de opacidade e desativação dos botões
+  if (indiceAtual === 0) {
+    btnAnterior.style.opacity = "0.5";
+    btnAnterior.disabled = true;
+  } else {
+    btnAnterior.style.opacity = "1";
+    btnAnterior.disabled = false;
+  }
+
+  if (indiceAtual === dados.length - 1) {
+    btnProximo.style.opacity = "0.5";
+    btnProximo.disabled = true;
+  } else {
+    btnProximo.style.opacity = "1";
+    btnProximo.disabled = false;
+  }
+}
+
+
+btnAnterior.addEventListener("click", () => {
+  indiceAtual = (indiceAtual - 1 + dados.length) % dados.length;
+  atualizarCarrossel();
+});
+
+btnProximo.addEventListener("click", () => {
+  indiceAtual = (indiceAtual + 1) % dados.length;
+  atualizarCarrossel();
+});
+
+// inicializa
+atualizarCarrossel();
