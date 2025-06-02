@@ -21,20 +21,39 @@
     color: #0D0D0F;
     background: transparent; /* fundo transparente */
     overflow-x: hidden;
+    background-color: white;
 }
 
 header {
-    position: fixed;      /* fixa no topo da tela */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65px;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-    z-index: 1000;        /* fica acima de tudo */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  z-index: 1000;
+  background-color: transparent;
+  color: white; /* default dark */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+header.light-mode {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
+header.dark-mode {
+  background-color: black;
+  color: green;
+  border-color: white;
+}
+
+
+
+
 
 /* seu fundo com imagem */
 .fundo {
@@ -274,7 +293,6 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
-  font-weight: 700;
   font-size: 1.5rem;
   text-shadow: 0 0 10px rgba(0,0,0,0.8);
   opacity: 0;
@@ -316,18 +334,19 @@ header {
   flex-direction: row;
   height: 600px;
   width: 100%;
-  background-color: white;
   padding: 20px;
   box-sizing: border-box;
   color: #0D0D0F;
   margin-left: 25px;
+  margin-top: -20px;
 }
 
 .categorias img {
-  height: 600px;
+   height: 600px;
   width: 543px;
   object-fit: cover;
   margin-left: auto;
+  flex-shrink: 0; /* <- importante */
 }
 
 .information {
@@ -335,12 +354,14 @@ header {
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
-
+  max-width: calc(100% - 543px - 40px); /* largura total - imagem - padding */
+  box-sizing: border-box;
 }
+
 
 .titulo {
   font-size: 45px;
-  margin-top: 10px;
+  margin-top: 40px;
   color: #0D0D0F;
   font-weight: 100;
 }
@@ -348,7 +369,7 @@ header {
 .linha-categoria {
   width: 700px;
   border: 1px solid #0D0D0F;
-  margin: 10px 0;
+  margin: 20px 0 10px;
 }
 
 .descricao {
@@ -361,10 +382,18 @@ header {
 
 .botoes-row {
   display: flex;
-  align-items: center;
-  gap: 30px;
   font-size: 22px;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap; /* NÃO deixa quebrar para baixo */
+  width: 100%;
+}
+.botoes-direita {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+  margin-right: 50px;
 }
 
 .botao-link {
@@ -384,7 +413,6 @@ header {
 }
 
 .posicao {
-  margin-left: 450px;
   color: #0D0D0F;
   width: 50px;
 }
@@ -429,7 +457,7 @@ header {
   display: flex;
   flex-direction: row;
   margin-left: 75px;
-  margin-top: 100px;
+  margin-top: 150px;
   height: 350px;
 }
 .inscrito {
@@ -447,7 +475,7 @@ h6 {
   font-size: 30px;
   text-align: center;
   font-weight: 100;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 
 }
 .inscrito input {
@@ -468,6 +496,7 @@ h6 {
   cursor: pointer;
   background-color: transparent;
   margin-top: 50px;
+  margin-left: 30%;
 }
 .inscreva-se:hover {
   color: #fff;
@@ -476,7 +505,7 @@ h6 {
 }
 .input-wrapper {
   position: relative;
-  width: 100%;
+  width: 500px;
 }
 
 .input-wrapper input {
@@ -514,6 +543,148 @@ h6 {
 
 
 
+.rodape-container {
+  background-color: #0e0e0f;
+  color: white;
+  margin-top: 50px;
+}
+
+.rodape-container .info {
+  margin: 15px 10px;
+  font-size: 17px; /* era o padrão, agora levemente maior */
+}
+
+.rodape-conteudo {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  padding-bottom: 80px; /* AUMENTO AQUI */
+  flex-wrap: wrap;
+}
+
+.rodape-coluna {
+  flex: 1;
+  min-width: 250px;
+  margin: 20px;
+}
+
+.rodape-logo {
+  width: 80px; /* Aumentado de 70px */
+  margin-bottom: 10px;
+}
+
+.rodape-logo-conjunto {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.rodape-logo-texto {
+  font-size: 38px; /* de 35px para 38px */
+  color: white;
+  padding: 5px;
+}
+
+.rodape-linha {
+  margin-top: -10px;
+  border: none;
+  border-top: 2px solid #5e5ce6;
+  width: 350px;
+  margin-bottom: 15px;
+}
+
+.rodape-coluna h4 {
+  font-size: 20px; /* de 18px para 20px */
+  margin-bottom: 10px;
+}
+
+.rodape-coluna ul {
+  list-style: none;
+  padding: 0;
+}
+
+.rodape-coluna li {
+  margin-bottom: 8px; /* mais espaçamento */
+  font-size: 17px; /* de 15px para 17px */
+}
+
+.rodape-coluna ul li a {
+  color: #aaa;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.rodape-coluna ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.rodape-coluna ul li a:hover {
+  color: white;
+}
+
+.rodape-coluna ul li a:hover::after {
+  width: 100%;
+}
+
+.rodape-news {
+  font-size: 18px; /* de 16px para 18px */
+  margin-bottom: 10px;
+}
+
+.rodape-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.rodape-input {
+  padding: 12px; /* de 10px para 12px */
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px; /* de 14px para 16px */
+}
+
+.rodape-botao {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.rodape-botao:hover {
+  background-color: #eee;
+}
+
+.rodape-creditos {
+  text-align: center;
+  background-color: #7b88dd;
+  padding: 12px;
+  font-size: 16px; /* de 14px para 16px */
+  color: white;
+}
+.rodape-coluna form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+
 
 
 
@@ -525,7 +696,7 @@ h6 {
 $html = file_get_contents('header1.html');
 echo $html;
 ?>
-    <div class="fundo">
+    <div class="fundo" data-color="dark">
         <div class="overlay">
             <div class="titulo-principal">
                 DEPARTAMENTO DE <br> SUPRIMENTOS
@@ -540,7 +711,7 @@ echo $html;
           </div>
         </div>
     </div>
-    <div class="pontos">
+    <div class="pontos" data-color="dark-mode">
     <div class="texto-box">
         Garantimos que cada equipe tenha os recursos certos no momento certo, com eficiência, suporte técnico confiável e foco em alta performance operacional.
     </div>
@@ -630,33 +801,79 @@ echo $html;
     <p class="descricao" id="descricao">Dispositivos essenciais usados pelas equipes no dia a dia e na operação dos sistemas da empresa.</p>
 
     <div class="botoes-row">
-      <a href="#" class="botao-link" id="link">Dê uma olhada</a>
-      <span class="posicao" id="posicao">1/5</span>
-      <div class="controles">
-        <button class="circulo" id="anterior">
-          <img src="./imgs/setaEsquerda.png" alt="Seta para esquerda">
-        </button>
-        <button class="circulo" id="proximo">
-          <img src="./imgs/setaEsquerda.png" alt="Seta para direita" class="seta-direita">
-        </button>
-      </div>
+  <a href="#" class="botao-link" id="link">Dê uma olhada</a>
+
+  <div class="botoes-direita">
+    <span class="posicao" id="posicao">1/5</span>
+    <div class="controles">
+      <button class="circulo" id="anterior">
+        <img src="./imgs/setaEsquerda.png" alt="Seta para esquerda">
+      </button>
+      <button class="circulo" id="proximo">
+        <img src="./imgs/setaEsquerda.png" alt="Seta para direita" class="seta-direita">
+      </button>
     </div>
   </div>
+</div>
 
-  <img id="imagem" src="./imgs/categoriaDois.png" style="margin-top: -20px;" alt="Imagem da categoria">
+  </div>
+
+  <img id="imagem" src="./imgs/categoriaDois.png" alt="Imagem da categoria">
+
 </div>
 
 <div class="newsletter">
   <h1 class="tituloNewsletter">Fique de olho nas novidades</h1>
   <div class="inscrito">
     <h6>Se inscreva no nosso newsletter</h6>
-    <div class="input-wrapper">
-      <img src="./imgs/email-icon.png" alt="Ícone de e-mail" class="input-icon" />
-      <input type="email" placeholder="Seu e-mail" name="email" autocomplete="email" />
-    </div>
-    <button class="inscreva-se">Inscreva-se</button>
+    <form id="formNewsletter">
+      <div class="input-wrapper">
+        <img src="./imgs/email-icon.png" alt="Ícone de e-mail" class="input-icon" />
+        <input type="email" placeholder="Seu e-mail" name="email" id="email" autocomplete="email" required />
+      </div>
+      <button class="inscreva-se">Inscreva-se</button>
+    </form>
+    <p id="mensagem" style="display: none; color: #6E6EFF; margin-top: 15px;"></p>
   </div>
 </div>
+
+<div class="rodape-container">
+  <div class="rodape-conteudo">
+    <div class="rodape-coluna">
+      <div class="rodape-logo-conjunto">
+        <img src="./imgs/LogoRodape.png" alt="Logo Augebit" class="rodape-logo">
+        <span class="rodape-logo-texto">AUGEBIT</span>
+      </div>
+      <hr class="rodape-linha">
+      <p class="info">augebt@gmail.com</p>
+      <p class="info">+ (55) 11 12345–6789</p>
+  </div>
+    
+    <div class="rodape-coluna">
+  <h4>Produtos</h4>
+  <ul>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Periféricos</a></li>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Equipamentos</a></li>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Cabos e conectividade</a></li>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Impressão e digitalização</a></li>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Manutenção e peças</a></li>
+  </ul>
+</div>
+
+    <div class="rodape-coluna">
+      <p class="rodape-news">Fique por dentro das novidades do nosso<br>departamento.</p>
+      <form id="formNewsletterRodape">
+        <input type="email" placeholder="E-mail" id="emailRodape" class="rodape-input" required>
+        <button type="submit" class="rodape-botao">Inscreva-se</button>
+      </form>
+      <p id="mensagemRodape" style="display: none; color: #6E6EFF; margin-top: 15px;"></p>
+    </div>
+  </div>
+  <div class="rodape-creditos">
+    Todos os direitos reservados à equipe do projeto semestral da Augebit – Departamento de Suprimentos de Informática.
+  </div>
+</div>
+
 
 
 
@@ -668,7 +885,76 @@ echo $html;
 
 
 <script src="index.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('formNewsletter');
+  const emailInput = document.getElementById('email');
+  const mensagem = document.getElementById('mensagem');
 
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+
+    fetch('salvar.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `email=${encodeURIComponent(email)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Esconde o formulário e mostra a mensagem
+        form.style.display = 'none';
+        mensagem.style.display = 'block';
+        mensagem.textContent = data.message;
+      } else {
+        alert(data.message); // mostra erro
+      }
+    })
+    .catch(error => {
+      console.error('Erro:', error);
+      alert('Erro ao enviar. Tente novamente.');
+    });
+  });
+});
+
+const formRodape = document.getElementById('formNewsletterRodape');
+    const emailInputRodape = document.getElementById('emailRodape');
+    const mensagemRodape = document.getElementById('mensagemRodape');
+
+    if (formRodape) {
+      formRodape.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const email = emailInputRodape.value.trim();
+
+        fetch('salvar.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `email=${encodeURIComponent(email)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            formRodape.style.display = 'none';
+            mensagemRodape.style.display = 'block';
+            mensagemRodape.textContent = data.message;
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Erro:', error);
+          alert('Erro ao enviar. Tente novamente.');
+        });
+      });
+    }
+
+</script>
 
 
 </body>

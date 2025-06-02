@@ -44,13 +44,19 @@
             width: 158px;
             height: 47px;
             border-radius: 27px;
-            border: 3px solid transparent;
-            color: #0D0D0F;
-            background-color: #D9D9D9; /* fundo preto */
+            border: 3px solid white; /* borda clara para ser afetada pelo blend */
+            color: white;             /* texto claro para efeito de diferença */
+            background-color: transparent; /* fundo transparente para não atrapalhar o blend */
             font-size: 20px;
             margin-right: 30px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
+            mix-blend-mode: difference;
+        }
+
+        .botao1:hover {
+            background-color: white; /* ao passar o mouse, inverte as cores */
+            color: black;
         }
 
         .botao2 {
@@ -58,23 +64,25 @@
             height: 47px;
             border-radius: 27px;
             background-color: transparent;
-            color: #D9D9D9;
+            color: white;
             font-size: 20px;
-            border: 3.5px solid #D9D9D9;
+            border: 3.5px solid white;
             margin-right: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
+            mix-blend-mode: difference;
         }
 
         .botao2:hover {
-            background-color: #D9D9D9; /* hover: fundo preto */
-            color: #0D0D0F;             /* hover: texto branco */
+            background-color: white;
+            color: black;
         }
-        .botao1:hover {
-            background-color: #0D0D0F; /* hover: fundo preto */
-            color: #D9D9D9;             /* hover: texto branco */
 
-        }
+
+    
+
+
+        
     </style>
 </head>
 <body>
@@ -86,5 +94,8 @@
         <button class="botao2">Login</button>
         <button class="botao1">Contato</button>
     </header>
+
+    
+
 </body>
 </html>

@@ -1,3 +1,34 @@
+const header = document.querySelector("header");
+
+const modoHeaderObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const modo = entry.target.getAttribute("data-color");
+
+      if (modo === "dark") {
+        header.classList.remove("light-mode");
+        header.classList.add("dark-mode");
+      } else {
+        header.classList.remove("dark-mode");
+        header.classList.add("light-mode");
+      }
+    }
+  });
+}, {
+  threshold: 0.5
+});
+
+// Observar todos os elementos que tenham o atributo data-color
+document.querySelectorAll("[data-color]").forEach(section => {
+  modoHeaderObserver.observe(section);
+});
+
+
+
+
+
+
+
 const textoBox = document.querySelector('.texto-box');
 
   const observer = new IntersectionObserver((entries) => {
@@ -155,3 +186,35 @@ btnProximo.addEventListener("click", () => {
 
 // inicializa
 atualizarCarrossel();
+
+
+
+
+
+document.getElementById('formNewsletter').addEventListener('submit', function (event) {
+  event.preventDefault(); // evita recarregar a página
+
+  const emailInput = document.getElementById('email');
+  const email = emailInput.value.trim();
+
+  fetch('salvar.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `email=${encodeURIComponent(email)}`
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+    if (data.success) {
+      emailInput.value = ''; // limpa o campo após sucesso
+    }
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+    alert('Erro ao enviar. Tente novamente.');
+  });
+});
+
+
