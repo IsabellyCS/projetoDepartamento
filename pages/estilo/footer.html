@@ -1,0 +1,183 @@
+<div class="rodape-container">
+  <div class="rodape-conteudo">
+    <div class="rodape-coluna">
+      <div class="rodape-logo-conjunto">
+        <img src="../estilo/imgs/LogoRodape.png" alt="Logo Augebit" class="rodape-logo">
+        <span class="rodape-logo-texto">AUGEBIT</span>
+      </div>
+      <hr class="rodape-linha">
+      <p class="info">augebt@gmail.com</p>
+      <p class="info">+ (55) 11 12345–6789</p>
+  </div>
+    
+    <div class="rodape-coluna">
+  <h4>Produtos</h4>
+  <ul>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Periféricos</a></li>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Equipamentos</a></li>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Cabos e conectividade</a></li>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Impressão e digitalização</a></li>
+    <li><a href="http://localhost/projetoDepartamento/pages/produtos/produto.php">Manutenção e peças</a></li>
+  </ul>
+</div>
+
+    <div class="rodape-coluna">
+      <p class="rodape-news">Fique por dentro das novidades do nosso<br>departamento.</p>
+      <form id="formNewsletterRodape">
+        <input type="email" placeholder="E-mail" id="emailRodape" class="rodape-input" required>
+        <button type="submit" class="rodape-botao">Inscreva-se</button>
+      </form>
+      <p id="mensagemRodape" style="display: none; color: #6E6EFF; margin-top: 15px;"></p>
+    </div>
+  </div>
+  <div class="rodape-creditos">
+    Todos os direitos reservados à equipe do projeto semestral da Augebit – Departamento de Suprimentos de Informática.
+  </div>
+</div>
+
+<style>
+    .rodape-container {
+        background-color: #0e0e0f;
+        color: white;
+        margin-top: 50px;
+        }
+
+        .rodape-container .info {
+        margin: 15px 10px;
+        font-size: 17px; /* era o padrão, agora levemente maior */
+        }
+
+        .rodape-conteudo {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px;
+        padding-bottom: 80px; /* AUMENTO AQUI */
+        flex-wrap: wrap;
+        }
+
+        .rodape-coluna {
+            flex: 1;
+            min-width: 250px;
+            max-width: 420px; /* Adicionado para limitar o tamanho */
+            margin: 20px;
+            }
+
+        .rodape-logo {
+        width: 80px; /* Aumentado de 70px */
+        margin-bottom: 10px;
+        }
+
+        .rodape-logo-conjunto {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        }
+
+        .rodape-logo-texto {
+        font-size: 38px; /* de 35px para 38px */
+        color: white;
+        padding: 5px;
+        }
+
+        .rodape-linha {
+        margin-top: -10px;
+        border: none;
+        border-top: 2px solid #5e5ce6;
+        width: 350px;
+        margin-bottom: 15px;
+        }
+
+        .rodape-coluna h4 {
+        font-size: 20px; /* de 18px para 20px */
+        margin-bottom: 10px;
+        }
+
+        .rodape-coluna ul {
+        list-style: none;
+        padding: 0;
+        }
+
+        .rodape-coluna li {
+        margin-bottom: 8px; /* mais espaçamento */
+        font-size: 17px; /* de 15px para 17px */
+        }
+
+        .rodape-coluna ul li a {
+        color: #aaa;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        transition: color 0.3s ease;
+        }
+
+        .rodape-coluna ul li a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: white;
+        transition: width 0.3s ease;
+        }
+
+        .rodape-coluna ul li a:hover {
+        color: white;
+        }
+
+        .rodape-coluna ul li a:hover::after {
+        width: 100%;
+        }
+
+        .rodape-news {
+        font-size: 18px; /* de 16px para 18px */
+        margin-bottom: 10px;
+        }
+
+        .rodape-form {
+        display: flex;
+        flex-direction: column;
+        }
+
+        .rodape-input {
+            padding: 12px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            }
+        .rodape-input,
+        .rodape-botao {
+        width: 100%;
+        box-sizing: border-box; /* garante que padding/border não ultrapassem largura */
+        max-width: 100%; /* garante que nada ultrapasse a coluna */
+        }
+
+        .rodape-botao {
+        background-color: white;
+        color: black;
+        border: none;
+        padding: 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        }
+
+        .rodape-botao:hover {
+        background-color: #eee;
+        }
+
+        .rodape-creditos {
+        text-align: center;
+        background-color: #7b88dd;
+        padding: 12px;
+        font-size: 16px; /* de 14px para 16px */
+        color: white;
+        }
+        .rodape-coluna form {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch; /* força os filhos a ocuparem toda a largura */
+            }
+</style>

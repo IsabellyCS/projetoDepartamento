@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Departamento de Suprimentos</title>
     <style>
+      
         * {
             margin: 0;
             padding: 0;
@@ -35,21 +36,80 @@ header {
   margin-left: 20px;
   z-index: 1000;
   background-color: transparent;
-  color: white; /* default dark */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-header.light-mode {
-  background-color: white;
-  color: black;
-  border-color: black;
+.logo {
+  margin-left: 175px;
+  margin-right: 360px;
+  height: 50px;
+  width: 60px;
+  cursor: pointer;
 }
 
-header.dark-mode {
-  background-color: black;
-  color: green;
-  border-color: white;
+/* Estilo base */
+.botao1, .botao2 {
+  width: 158px;
+  height: 47px;
+  border-radius: 27px;
+  font-size: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
+/* Modo Escuro */
+header.dark-mode .botao1 {
+  background-color: white;
+  color: black;
+  border: none;
+}
+
+header.dark-mode .botao1:hover {
+  background-color: transparent;
+  color: white;
+  border: 3px solid white;
+}
+
+header.dark-mode .botao2 {
+  background-color: transparent;
+  color: white;
+  border: 3px solid white;
+}
+
+header.dark-mode .botao2:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Modo Claro */
+header.light-mode .botao1 {
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+header.light-mode .botao1:hover {
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+}
+
+header.light-mode .botao2 {
+  background-color: transparent;
+  color: black;
+  border: 3px solid black;
+}
+
+header.light-mode .botao2:hover {
+  background-color: #111;
+  color: white;
+  
+}
+
+
+
+
 
 
 
@@ -201,7 +261,7 @@ header.dark-mode {
 
    .carrossel-container {
     font-family: Arial, sans-serif;
-    background: #111;
+    background: #0D0D0F;
     color: #ccc;
     text-align: center;
     padding: 90px;
@@ -338,7 +398,7 @@ header.dark-mode {
   box-sizing: border-box;
   color: #0D0D0F;
   margin-left: 25px;
-  margin-top: -20px;
+  margin-top: 100px;
 }
 
 .categorias img {
@@ -361,7 +421,7 @@ header.dark-mode {
 
 .titulo {
   font-size: 45px;
-  margin-top: 40px;
+  margin-top: -85px;
   color: #0D0D0F;
   font-weight: 100;
 }
@@ -377,7 +437,7 @@ header.dark-mode {
   max-width: 800px;
   margin-bottom: auto;
   color: #0D0D0F;
-  margin-top: 25px;
+  margin-top: 55px;
 }
 
 .botoes-row {
@@ -693,10 +753,11 @@ h6 {
 </head>
 <body>
     <?php
-$html = file_get_contents('header1.html');
+$html = file_get_contents('header.html');
 echo $html;
 ?>
-    <div class="fundo" data-color="dark">
+
+    <div class="fundo" data-theme="dark">
         <div class="overlay">
             <div class="titulo-principal">
                 DEPARTAMENTO DE <br> SUPRIMENTOS
@@ -711,14 +772,14 @@ echo $html;
           </div>
         </div>
     </div>
-    <div class="pontos" data-color="dark-mode">
+    <div class="pontos" data-theme="light">
     <div class="texto-box">
         Garantimos que cada equipe tenha os recursos certos no momento certo, com eficiência, suporte técnico confiável e foco em alta performance operacional.
     </div>
 </div>
 
 
-<div class="carrossel-container">
+<div class="carrossel-container" data-theme="dark">
   <p class="carrossel-texto">
     <span class="carrossel-frase" data-index="0">Conheça os novos periféricos.</span>
     <span class="carrossel-frase" data-index="1"> Itens essenciais para o dia a dia.</span>
@@ -794,7 +855,7 @@ echo $html;
 </div>
 
 
-<div class="categorias">
+<div class="categorias" data-theme="light">
   <div class="information">
     <h2 class="titulo" id="titulo">Equipamentos</h2>
     <hr class="linha-categoria" />
@@ -822,7 +883,7 @@ echo $html;
 
 </div>
 
-<div class="newsletter">
+<div class="newsletter" data-theme="light">
   <h1 class="tituloNewsletter">Fique de olho nas novidades</h1>
   <div class="inscrito">
     <h6>Se inscreva no nosso newsletter</h6>
@@ -873,6 +934,8 @@ echo $html;
     Todos os direitos reservados à equipe do projeto semestral da Augebit – Departamento de Suprimentos de Informática.
   </div>
 </div>
+
+
 
 
 
@@ -953,6 +1016,50 @@ const formRodape = document.getElementById('formNewsletterRodape');
         });
       });
     }
+
+
+
+const header = document.querySelector("header");
+const logo = document.getElementById("logo"); // <- linha adicionada
+
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        const tema = entry.target.getAttribute("data-theme");
+
+        if (tema === "light") {
+          header.classList.add("light-mode");
+          header.classList.remove("dark-mode");
+          logo.src = "imgs/logoPreto.png"; // ← agora usa a logo preta no modo claro
+        } else {
+          header.classList.add("dark-mode");
+          header.classList.remove("light-mode");
+          logo.src = "imgs/logoBranco.png"; // ← agora usa a logo branca no modo escuro
+        }
+
+      }
+    });
+  },
+  {
+    root: null,
+    threshold: 0.8,
+    rootMargin: "-65px 0px 0px 0px"
+  }
+);
+
+document.querySelectorAll("[data-theme]").forEach(secao => {
+  observer.observe(secao);
+});
+
+
+
+
+
+
+
+
+
 
 </script>
 

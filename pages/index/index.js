@@ -1,29 +1,3 @@
-const header = document.querySelector("header");
-
-const modoHeaderObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const modo = entry.target.getAttribute("data-color");
-
-      if (modo === "dark") {
-        header.classList.remove("light-mode");
-        header.classList.add("dark-mode");
-      } else {
-        header.classList.remove("dark-mode");
-        header.classList.add("light-mode");
-      }
-    }
-  });
-}, {
-  threshold: 0.5
-});
-
-// Observar todos os elementos que tenham o atributo data-color
-document.querySelectorAll("[data-color]").forEach(section => {
-  modoHeaderObserver.observe(section);
-});
-
-
 
 
 
@@ -31,18 +5,19 @@ document.querySelectorAll("[data-color]").forEach(section => {
 
 const textoBox = document.querySelector('.texto-box');
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        textoBox.classList.add('tilt-in-left-1');
-        observer.unobserve(entry.target); // só anima uma vez
-      }
-    });
-  }, {
-    threshold: 0.3 // ativa quando 30% do elemento estiver visível
+const textoBoxObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      textoBox.classList.add('tilt-in-left-1');
+      textoBoxObserver.unobserve(entry.target); // só anima uma vez
+    }
   });
+}, {
+  threshold: 0.3
+});
 
-  observer.observe(textoBox);
+textoBoxObserver.observe(textoBox);
+
 
 
 
