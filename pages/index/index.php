@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -752,10 +758,7 @@ h6 {
     </style>
 </head>
 <body>
-    <?php
-$html = file_get_contents('header.html');
-echo $html;
-?>
+<?php include_once('../estilo/headerAzul.php'); ?>
 
     <div class="fundo" data-theme="dark">
         <div class="overlay">

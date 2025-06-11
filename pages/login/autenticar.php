@@ -1,40 +1,45 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Conexão com o banco
 $servername = "localhost";
-$username = "root"; // ou seu usuário do banco
-$password = "";     // senha do MySQL, se houver
+$username = "root";
+$password = "";
 $dbname = "acessodepartamento";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verifica conexão
 if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
-// Recebe dados do formulário
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+$email = $conn->real_escape_string($_POST['email']);
+$senha = $conn->real_escape_string($_POST['senha']);
 
-// Previne SQL Injection
-$email = $conn->real_escape_string($email);
-$senha = $conn->real_escape_string($senha);
-
-// Consulta
 $sql = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";
 $result = $conn->query($sql);
 
-// Validação
 if ($result->num_rows > 0) {
-    // Login bem-sucedido
-    echo "<script>alert('Login realizado com sucesso!'); window.location.href='pagina-restrita.php';</script>";
-} else {
-    // Login falhou
-    echo "<script>
-    alert('Email ou senha incorretos.');
-    window.location.href = 'login.php';
-</script>";
+    $usuario = $result->fetch_assoc();
+    
+    $_SESSION['id'] = $usuario['id'];
+    $_SESSION['email'] = $usuario['email'];
+    $_SESSION['nome'] = $usuario['nome'];
+    $_SESSION['cargo'] = $usuario['cargo'];
 
+    session_write_close();
+    header("Location: ../contato/contato.php");
+    exit;
+
+    if ($usuario['cargo'] === 'Departamento de Suprimentos') {
+        echo "<script>alert('Login como administrador'); window.location.href='../contato/contato.php';</script>";
+    } else {
+        echo "<script>alert('Login como usuário comum'); window.location.href='../contato/contato.php';</script>";
+    }
+} else {
+    echo "<script>alert('Email ou senha incorretos.'); window.location.href='login.php';</script>";
 }
 
 $conn->close();

@@ -5,7 +5,10 @@
         <button class="botao2">Novidades</button>
         <img src="../estilo/imgs/LogoRodape.png" id="logo" alt="Logo" class="logo" />
         <button class="botao2">Login</button>
-        <button class="botao1">Contato</button>
+        <a href="../contato/contato.php">
+            <button class="botao1">Contato</button>
+            </a>
+
     </header>
 <style>
     @font-face {

@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (empty($_SESSION['cargo'])) {
+    echo "<script>alert('Você precisa estar logado para acessar a página de contato.'); window.location.href='../login/login.php';</script>";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -229,6 +238,14 @@
 
 
 <section class="tudo" data-theme="light">
+    <p style="font-weight: bold; color: #333;">
+    <?php
+    if (!empty($_SESSION['nome']) && !empty($_SESSION['cargo'])) {
+        echo "Olá, " . $_SESSION['nome'] . " (" . $_SESSION['cargo'] . ")";
+    }
+    ?>
+</p>
+
 <div class="row">
     <div class="esquerda">
         <p class="t1">Tem Alguma Pergunta?</p>
