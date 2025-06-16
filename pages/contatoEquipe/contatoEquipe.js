@@ -41,3 +41,35 @@ document.querySelectorAll('.secao').forEach(btn => {
 
 // Carregar a aba padrão ao entrar
 document.querySelector('.secao.ativa').click();
+
+
+//modal 
+
+function abrirModal(data) {
+    const modal = document.getElementById('modalFeedback');
+    document.getElementById('modalNome').textContent = data.nome;
+    document.getElementById('modalEmail').textContent = data.email;
+    document.getElementById('modalMensagem').textContent = data.mensagem;
+    document.getElementById('modalPedido').textContent = data.id_pedido;
+    document.getElementById('modalData').textContent = data.data_envio;
+
+    modal.style.display = 'flex';
+  }
+
+  function fecharModal(event) {
+    if (event.target.id === 'modalFeedback') {
+      document.getElementById('modalFeedback').style.display = 'none';
+    }
+  }
+
+  function abrirModalFromBase64(encodedData) {
+    const decoded = atob(encodedData);
+    const data = JSON.parse(decoded);
+    abrirModal(data);
+  }
+
+  
+
+
+
+

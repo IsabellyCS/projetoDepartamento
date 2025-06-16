@@ -97,7 +97,6 @@
         .row {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
         }
 
         .secao {
@@ -111,11 +110,12 @@
             margin: 0 5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            opacity: 0.5;
         }
 
         .secao.ativa {
             font-weight: bold;
-            background-color: #eee;
+            opacity: 1;
         }
 
         .conteudo {
@@ -145,11 +145,14 @@
         }
 
         .cards {
+            margin-left: 20px;
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 80px;
             justify-content: flex-start;
+            width: 100%;
         }
+
         .perfil {
             border-radius: 35px;
             border: 1px solid black;
@@ -164,12 +167,20 @@
             width: 55px;
             height: 55px;
         }
+        .card-feedback {
+            width: calc((85% - 40px) / 3); /* 3 por linha com 2 gaps de 20px */
+            box-sizing: border-box;
+        }
+
+
 
     </style>
 </head>
 <body>
 
 <?php include_once('../estilo/headerAzul.php'); ?>
+
+
 
 <h6 class="title">Feedbacks dos Funcionários</h6>
 
@@ -189,6 +200,8 @@
     </div>
 </div>
 
+
+<?php include './componentes/modal_feedback.php'; ?>
 <script src="contatoEquipe.js"></script>
 
 </body>
