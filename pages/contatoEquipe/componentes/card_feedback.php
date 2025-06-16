@@ -9,14 +9,15 @@ function exibirCardFeedback($f) {
     ];
     $imgSrc = isset($iconesSetor[$f['setor']]) ? $iconesSetor[$f['setor']] : '../estilo/imgs/SetorDDS.png';
             $dadosModal = base64_encode(json_encode([
-    "id" => $f["id"], // se necessário
-    "nome" => $f["nome"],
-    "email" => $f["email"],
-    "mensagem" => $f["mensagem"],
-    "id_pedido" => $f["id_pedido"],
-    "data_envio" => $f["data"],
-    "setor" => $f["setor"] // <--- ISSO É ESSENCIAL para a imagem carregar
-]));
+                "id" => $f["id"],
+                "nome" => $f["nome"],
+                "email" => $f["email"],
+                "mensagem" => $f["mensagem"],
+                "id_pedido" => $f["id_pedido"],
+                "data_envio" => $f["data"],
+                "setor" => $f["setor"]  // importante para a imagem do modal
+            ]));
+
 
 
 

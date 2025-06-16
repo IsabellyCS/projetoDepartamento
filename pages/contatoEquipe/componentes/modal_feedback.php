@@ -1,7 +1,8 @@
+
 <div id="modalFeedback" class="modal-overlay" onclick="fecharModal(event)">
   <div class="modal-content">
     <div class="modal-topo">
-      <img id="modalImagemSetor" src="" alt="Setor" class="imagem-perfil">
+      <img id="modalImagemSetor" src="../estilo/imgs/SetorRH.png" alt="Setor" class="imagem-perfil">
       <div class="info-texto">
         <h3 id="modalNome">Nome</h3>
         <div class="linhaAzul"></div>
@@ -150,31 +151,32 @@
 
 <script>
   function abrirModal(data) {
-    const modal = document.getElementById('modalFeedback');
-    if (!modal) return;
+  const modal = document.getElementById('modalFeedback');
+  if (!modal) return;
 
-    const iconesSetor = {
-      'Departamento de Recursos Humanos': '../estilo/imgs/SetorRH.png',
-      'Serviços de Projetos Industriais': '../estilo/imgs/SetorPI.png',
-      'Departamento de Suprmentos': '../estilo/imgs/SetorDDS.png',
-      'Serviços de Treinamentos Industriais': '../estilo/imgs/SetorTI.png'
-    };
+  const iconesSetor = {
+    'Departamento de Recursos Humanos': '../estilo/imgs/SetorRH.png',
+    'Serviços de Projetos Industriais': '../estilo/imgs/SetorPI.png',
+    'Departamento de Suprmentos': '../estilo/imgs/SetorDDS.png',
+    'Serviços de Treinamentos Industriais': '../estilo/imgs/SetorTI.png'
+  };
 
-    document.getElementById('modalFeedbackId').value = data.id || '';
-    document.getElementById('modalNome').textContent = data.nome || '';
-    document.getElementById('modalEmail').textContent = data.email || '';
-    document.getElementById('modalMensagem').textContent = data.mensagem || '';
-    document.getElementById('modalPedido').textContent = `#${data.id_pedido || '00000'}`;
-    document.getElementById('modalData').textContent = data.data_envio || '';
-    document.getElementById('modalSetor').textContent = data.setor || '';
+  document.getElementById('modalFeedbackId').value = data.id || '';
+  document.getElementById('modalNome').textContent = data.nome || '';
+  document.getElementById('modalEmail').textContent = data.email || '';
+  document.getElementById('modalMensagem').textContent = data.mensagem || '';
+  document.getElementById('modalPedido').textContent = `#${data.id_pedido || '00000'}`;
+  document.getElementById('modalData').textContent = data.data_envio || '';
+  // Se tiver elemento modalSetor, atualize também
+  const elSetor = document.getElementById('modalSetor');
+  if(elSetor) elSetor.textContent = data.setor || '';
 
+  const imagemSetor = iconesSetor[data.setor] || '../estilo/imgs/SetorDDS.png';
+  document.getElementById('modalImagemSetor').src = imagemSetor;
 
-    const imagemSetor = iconesSetor[data.cargo] || '../estilo/imgs/SetorDDS.png';
-    document.getElementById('modalImagemSetor').src = imagemSetor;
+  modal.style.display = 'flex';
+}
 
-
-    modal.style.display = 'flex';
-  }
 
   function abrirModalFromBase64(encoded) {
     try {
