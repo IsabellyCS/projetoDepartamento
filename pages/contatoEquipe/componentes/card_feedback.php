@@ -25,7 +25,8 @@ function exibirCardFeedback($f) {
     <div class="card-feedback">
         <div class="cabecalho">
             <div class="icone">
-                <img src="<?php echo $imgSrc; ?>" alt="Ícone setor">
+                <img src="<?= $imgSrc ?>" alt="Setor" class="imagem-card" data-imagem="<?= $imgSrc ?>">
+
             </div>
             <div class="info-usuario">
                 <strong style="font-size: 16px;"><?php echo htmlspecialchars($f['nome']); ?></strong><br>
@@ -199,3 +200,22 @@ function exibirCardFeedback($f) {
     <?php
 }
 ?>
+<script>
+  function abrirModalFromBase64(element, encoded) {
+    try {
+      const decoded = atob(encoded);
+      const data = JSON.parse(decoded);
+
+      const imagemDoCard = element.querySelector('[data-imagem]');
+      if (imagemDoCard) {
+        data.imagem = imagemDoCard.getAttribute('data-imagem');
+      }
+
+      abrirModal(data);
+    } catch (e) {
+      console.error("Erro ao decodificar os dados do modal:", e);
+      alert("Erro ao abrir o modal. Dados inválidos.");
+    }
+  }
+</script>
+
