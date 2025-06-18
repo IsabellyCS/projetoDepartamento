@@ -44,29 +44,50 @@ document.querySelector('.secao.ativa').click();
 
 
 //modal 
-
-function abrirModal(data) {
-    const modal = document.getElementById('modalFeedback');
-    document.getElementById('modalNome').textContent = data.nome;
-    document.getElementById('modalEmail').textContent = data.email;
-    document.getElementById('modalMensagem').textContent = data.mensagem;
-    document.getElementById('modalPedido').textContent = data.id_pedido;
-    document.getElementById('modalData').textContent = data.data_envio;
-
-    modal.style.display = 'flex';
-  }
-
-  function fecharModal(event) {
-    if (event.target.id === 'modalFeedback') {
-      document.getElementById('modalFeedback').style.display = 'none';
-    }
-  }
-
-  function abrirModalFromBase64(encodedData) {
-    const decoded = atob(encodedData);
+function abrirModalFromBase64(encoded) {
+  try {
+    const decoded = atob(encoded);
     const data = JSON.parse(decoded);
     abrirModal(data);
+  } catch (e) {
+    console.error("Erro ao decodificar os dados do modal:", e);
+    alert("Erro ao abrir o modal. Dados inválidos.");
   }
+}
+function enviarResposta() {
+  const id = document.getElementById('modalFeedbackId').value;
+  const resposta = document.getElementById('resposta').value.trim();
+
+  if (!resposta) {
+    alert('Por favor, digite uma resposta antes de enviar.');
+    return;
+  }
+
+  fetch('salvar_resposta.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `id=${encodeURIComponent(id)}&resposta=${encodeURIComponent(resposta)}`
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert('Resposta enviada com sucesso!');
+        document.getElementById('modalFeedback').style.display = 'none';
+        // Opcional: atualizar visual na tela, remover card, marcar como respondido...
+      } else {
+        alert('Erro ao enviar resposta: ' + (data.error || 'Erro desconhecido'));
+      }
+    })
+    .catch(err => {
+      console.error('Erro na requisição:', err);
+      alert('Erro ao enviar resposta. Tente novamente.');
+    });
+}
+
+
+
 
   
 

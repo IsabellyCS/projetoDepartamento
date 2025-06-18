@@ -25,7 +25,7 @@ function exibirCardFeedback($f) {
     <div class="card-feedback">
         <div class="cabecalho">
             <div class="icone">
-                <img src="<?= $imgSrc ?>" alt="Setor" class="imagem-card" data-imagem="<?= $imgSrc ?>">
+                <img src="<?= $imgSrc ?>" class="imagem-card" alt="Setor" data-imagem="<?= $imgSrc ?>">
 
             </div>
             <div class="info-usuario">
@@ -57,7 +57,7 @@ function exibirCardFeedback($f) {
                 </span>
             </div>
             
-                <button class="responder" onclick="abrirModalFromBase64('<?php echo $dadosModal; ?>')">Responder</button>
+                <button class="responder" onclick="abrirModalFromBase64('<?= base64_encode(json_encode($f)) ?>')"')">Responder</button>
 
 
 
@@ -85,6 +85,7 @@ function exibirCardFeedback($f) {
             border-radius: 50%;
             margin: 15px 15px 5px 5px;
             overflow: hidden; /* Garante que a imagem não ultrapasse */
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         }
 
         .icone img {
@@ -194,28 +195,14 @@ function exibirCardFeedback($f) {
             text-overflow: ellipsis;
             white-space: normal;
         }
+        .info-usuario {
+            margin-top: 10px;
+        }
 
 
     </style>
     <?php
 }
 ?>
-<script>
-  function abrirModalFromBase64(element, encoded) {
-    try {
-      const decoded = atob(encoded);
-      const data = JSON.parse(decoded);
 
-      const imagemDoCard = element.querySelector('[data-imagem]');
-      if (imagemDoCard) {
-        data.imagem = imagemDoCard.getAttribute('data-imagem');
-      }
-
-      abrirModal(data);
-    } catch (e) {
-      console.error("Erro ao decodificar os dados do modal:", e);
-      alert("Erro ao abrir o modal. Dados inválidos.");
-    }
-  }
-</script>
 

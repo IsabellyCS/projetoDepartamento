@@ -97,6 +97,7 @@
         .row {
             display: flex;
             justify-content: center;
+            gap: 50px;
         }
 
         .secao {

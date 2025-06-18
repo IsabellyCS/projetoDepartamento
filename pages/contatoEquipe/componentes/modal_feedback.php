@@ -26,7 +26,7 @@
 
 
 
-    <button class="botao-responder-modal">Responder</button>
+    <button class="botao-responder-modal" onclick="enviarResposta()">Responder</button>
   </div>
 </div>
 
@@ -149,44 +149,18 @@
 </style>
 
 <script>
-  function abrirModal(data) {
-  const modal = document.getElementById('modalFeedback');
-  if (!modal) return;
-
-  const iconesSetor = {
-    'Departamento de Recursos Humanos': '../estilo/imgs/SetorRH.png',
-    'Serviços de Projetos Industriais': '../estilo/imgs/SetorPI.png',
-    'Departamento de Suprmentos': '../estilo/imgs/SetorDDS.png',
-    'Serviços de Treinamentos Industriais': '../estilo/imgs/SetorTI.png'
-  };
-
-  document.getElementById('modalFeedbackId').value = data.id || '';
-  document.getElementById('modalNome').textContent = data.nome || '';
-  document.getElementById('modalEmail').textContent = data.email || '';
-  document.getElementById('modalMensagem').textContent = data.mensagem || '';
-  document.getElementById('modalPedido').textContent = `#${data.id_pedido || '00000'}`;
-  document.getElementById('modalData').textContent = data.data_envio || '';
-  // Se tiver elemento modalSetor, atualize também
-  const elSetor = document.getElementById('modalSetor');
-  if(elSetor) elSetor.textContent = data.setor || '';
-
-  const imagemSetor = iconesSetor[data.setor] || '../estilo/imgs/SetorDDS.png';
-  document.getElementById('modalImagemSetor').src = imagemSetor;
-
-  modal.style.display = 'flex';
+  function abrirModalFromBase64(encoded) {
+  try {
+    const decoded = atob(encoded);
+    const data = JSON.parse(decoded);
+    abrirModal(data);
+  } catch (e) {
+    console.error("Erro ao decodificar os dados do modal:", e);
+    alert("Erro ao abrir o modal. Dados inválidos.");
+  }
 }
 
 
-  function abrirModalFromBase64(encoded) {
-    try {
-      const decoded = atob(encoded);
-      const data = JSON.parse(decoded);
-      abrirModal(data);
-    } catch (e) {
-      console.error("Erro ao decodificar os dados do modal:", e);
-      alert("Erro ao abrir o modal. Dados inválidos.");
-    }
-  }
 
   function fecharModal(e) {
     if (e.target.id === 'modalFeedback') {
@@ -194,44 +168,6 @@
     }
   }
 
-  function enviarResposta() {
-    const resposta = document.getElementById('resposta').value.trim();
-    const id = document.getElementById('modalFeedbackId').value;
-
-    if (resposta === '' || id === '') {
-      alert("Preencha a resposta antes de enviar.");
-      return;
-    }
-
-    fetch('salvar_resposta.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `id=${encodeURIComponent(id)}&resposta=${encodeURIComponent(resposta)}`
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        alert("Resposta salva com sucesso!");
-        document.getElementById('modalFeedback').style.display = 'none';
-        document.getElementById('resposta').value = '';
-        location.reload(); // recarrega a página para refletir a resposta
-      } else {
-        alert("Erro ao salvar resposta: " + data.error);
-      }
-    })
-    .catch(error => {
-      console.error('Erro na requisição:', error);
-      alert("Erro na requisição.");
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const botaoResponder = document.querySelector(".botao-responder-modal");
-    if (botaoResponder) {
-      botaoResponder.addEventListener("click", enviarResposta);
-    } else {
-      console.warn("Botão '.botao-responder-modal' não encontrado.");
-    }
-  });
+  
 </script>
 
