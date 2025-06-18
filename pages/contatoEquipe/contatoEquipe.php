@@ -87,10 +87,19 @@
             font-family: 'Poppins';
             src: url(./Fontes/Poppins-Regular.ttf);
         }
+        @font-face {
+            font-family: 'Eurostile';
+            src: url('../estilo/Fontes/orbitron-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            }
 
     .title {
-        font-size: 30px;
-        margin-top: 180px;
+        font-family: 'Eurostile', sans-serif;
+        letter-spacing: 2px;
+        color: #6400FF;
+        font-size: 45px;
+        margin-top: 140px;
         text-align: center;
         }
 
